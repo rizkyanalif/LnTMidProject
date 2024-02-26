@@ -24,3 +24,4 @@ Route::post('/store-karyawan', [KaryawanController::class, 'store']);
 Route::get('/detail-karyawan/{id}', [KaryawanController::class, 'showDetail']);
 Route::get('/edit-karyawan/{id}', [KaryawanController::class, 'edit']);
 Route::patch('/update-karyawan/{id}', [KaryawanController::class, 'update']);
+Route::delete('/delete/{id}', [KaryawanController::class, 'destroy']);

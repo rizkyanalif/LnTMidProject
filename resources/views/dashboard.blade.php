@@ -16,6 +16,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
         </div>
     @endif
+    @if (session('deleted'))
+        <div class="alert alert-danger text-center d-flex align-items-center justify-content-center gap-2">
+            {{ session('deleted') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+        </div>
+    @endif
     <table class="table text-center">
         <thead class="thead-dark">
           <tr>
@@ -33,7 +39,11 @@
                 <td>{{$karyawan->umur}}</td>
                 <td><a href="/detail-karyawan/{{$karyawan->id}}" class="btn btn-primary">Detail</a>
                     <a href="/edit-karyawan/{{$karyawan->id}}" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-primary">Hapus</a></td>
+                    <form action="/delete/{{$karyawan -> id}}" method="POST" id="deleteForm{{ $karyawan->id }}">
+                        @csrf
+                        @method('delete')
+                        <button type="button" onclick="confirmDelete({{ $karyawan->id }})" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
               </tr>
             </tbody>
         @endforeach
@@ -45,4 +55,14 @@
     </div>
 
 </body>
+<script>
+    function confirmDelete(karyawanId) {
+        var confirmation = confirm("Do you really wish to delete this book?");
+        if (confirmation) {
+            document.getElementById('deleteForm' + karyawanId).submit();
+        } else {
+            return false;
+        }
+    }
+</script>
 </html>

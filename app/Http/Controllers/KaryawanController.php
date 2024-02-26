@@ -93,8 +93,9 @@ class KaryawanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(karyawan $karyawan)
+    public function destroy($id)
     {
-        //
+        karyawan::destroy($id);
+        return redirect('/dashboard')->with('deleted', 'Karyawan berhasil dihapus');
     }
 }
